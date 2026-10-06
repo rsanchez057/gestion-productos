@@ -1,10 +1,9 @@
 package ni.edu.uam.gestionproductos.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "categoria")
@@ -15,14 +14,14 @@ public class Categoria {
     private Integer id;
 
     private String nombre;
+    private Boolean activa;
 
-    private boolean activa;
-
-    // Lado inverso de la relación 1:N (la FK vive en producto.categoria_id).
-    // @JsonIgnore evita la recursión infinita Categoria -> Producto -> Categoria.
-    @JsonIgnore
+    // --- ESTA ES LA PARTE IMPORTANTE ---
     @OneToMany(mappedBy = "categoria")
-    private List<Producto> productos = new ArrayList<>();
+    @JsonIgnoreProperties("categoria") // Ignora el atributo 'categoria' dentro de los productos para evitar el ciclo infinito
+    private List<Producto> productos;
+
+    // Getters y Setters (Asegúrate de tenerlos todos)
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -30,9 +29,15 @@ public class Categoria {
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public boolean isActiva() { return activa; }
-    public void setActiva(boolean activa) { this.activa = activa; }
+    public Boolean getActiva() { return activa; }
+    public void setActiva(Boolean activa) { this.activa = activa; }
 
-    public List<Producto> getProductos() { return productos; }
-    public void setProductos(List<Producto> productos) { this.productos = productos; }
+    // ¡Vital para que el JSON lo muestre!
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
 }

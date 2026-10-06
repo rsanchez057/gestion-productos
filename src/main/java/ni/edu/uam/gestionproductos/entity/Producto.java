@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "producto")
 public class Producto {
@@ -20,6 +20,7 @@ public class Producto {
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
+    @JsonIgnoreProperties("productos") // <-- Agrega esta línea
     private Categoria categoria;
 
     @ManyToOne
