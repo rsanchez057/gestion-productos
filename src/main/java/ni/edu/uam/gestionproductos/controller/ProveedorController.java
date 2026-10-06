@@ -1,7 +1,7 @@
 package ni.edu.uam.gestionproductos.controller;
 
 import ni.edu.uam.gestionproductos.entity.Proveedor;
-import ni.edu.uam.gestionproductos.repository.ProveedorRepository;
+import ni.edu.uam.gestionproductos.service.ProveedorService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,19 +10,19 @@ import java.util.List;
 @RequestMapping("/api/proveedores")
 public class ProveedorController {
 
-    private final ProveedorRepository repository;
+    private final ProveedorService service;
 
-    public ProveedorController(ProveedorRepository repository) {
-        this.repository = repository;
+    public ProveedorController(ProveedorService service) {
+        this.service = service;
     }
 
     @GetMapping
     public List<Proveedor> listar() {
-        return repository.findAll();
+        return service.listar();
     }
 
     @PostMapping
     public Proveedor guardar(@RequestBody Proveedor entidad) {
-        return repository.save(entidad);
+        return service.guardar(entidad);
     }
 }
