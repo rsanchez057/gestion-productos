@@ -1,5 +1,6 @@
 package ni.edu.uam.gestionproductos.controller;
 
+import ni.edu.uam.gestionproductos.dto.ProveedorRequestDTO;
 import ni.edu.uam.gestionproductos.entity.Proveedor;
 import ni.edu.uam.gestionproductos.service.ProveedorService;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class ProveedorController {
     }
 
     @PostMapping
-    public Proveedor guardar(@RequestBody Proveedor entidad) {
-        return service.guardar(entidad);
+    public Proveedor guardar(@RequestBody ProveedorRequestDTO dto) {
+        return service.guardar(dto);
     }
 }

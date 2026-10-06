@@ -1,5 +1,6 @@
 package ni.edu.uam.gestionproductos.controller;
 
+import ni.edu.uam.gestionproductos.dto.EtiquetaRequestDTO;
 import ni.edu.uam.gestionproductos.entity.Etiqueta;
 import ni.edu.uam.gestionproductos.service.EtiquetaService;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class EtiquetaController {
     }
 
     @PostMapping
-    public Etiqueta guardar(@RequestBody Etiqueta entidad) {
-        return service.guardar(entidad);
+    public Etiqueta guardar(@RequestBody EtiquetaRequestDTO dto) {
+        return service.guardar(dto);
     }
 }

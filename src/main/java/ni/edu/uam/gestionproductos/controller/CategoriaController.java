@@ -1,5 +1,6 @@
 package ni.edu.uam.gestionproductos.controller;
 
+import ni.edu.uam.gestionproductos.dto.CategoriaRequestDTO;
 import ni.edu.uam.gestionproductos.entity.Categoria;
 import ni.edu.uam.gestionproductos.service.CategoriaService;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public Categoria guardar(@RequestBody Categoria entidad) {
-        return service.guardar(entidad);
+    public Categoria guardar(@RequestBody CategoriaRequestDTO dto) {
+        return service.guardar(dto);
     }
 }

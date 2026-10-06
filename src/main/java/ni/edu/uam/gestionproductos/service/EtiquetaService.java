@@ -1,5 +1,6 @@
 package ni.edu.uam.gestionproductos.service;
 
+import ni.edu.uam.gestionproductos.dto.EtiquetaRequestDTO;
 import ni.edu.uam.gestionproductos.entity.Etiqueta;
 import ni.edu.uam.gestionproductos.repository.EtiquetaRepository;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,9 @@ public class EtiquetaService {
         return repository.findAll();
     }
 
-    public Etiqueta guardar(Etiqueta entidad) {
+    public Etiqueta guardar(EtiquetaRequestDTO dto) {
+        Etiqueta entidad = new Etiqueta();
+        entidad.setNombre(dto.getNombre());
         return repository.save(entidad);
     }
 }
